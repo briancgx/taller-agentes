@@ -1,0 +1,11 @@
+TICKET #002
+Cliente: Taller Mecánico "La Herradura"
+Fecha: 2026-11-04
+Asunto: Cotización de 20 filtros de aceite
+
+Hola, necesito una cotización por 20 filtros de aceite modelo FO-312
+para entrega en Misantla esta semana. ¿Tienen existencia y cuál sería
+el precio por mayoreo?
+
+Estado: ABIERTO
+Prioridad: alta

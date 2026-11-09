@@ -1,0 +1,11 @@
+TICKET #001
+Cliente: Juan Pérez
+Fecha: 2026-11-02
+Asunto: No me llegó mi factura
+
+Buenas tardes, compré 4 baleros el lunes y pagué con transferencia,
+pero no me llegó la factura a mi correo. ¿Me la pueden reenviar?
+Mi número de pedido es P-5582.
+
+Estado: ABIERTO
+Prioridad: media
