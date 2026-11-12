@@ -1,33 +1,26 @@
 """
-DEFENSA 3 — Mínimo privilegio + confirmación humana.
-Tapa: borrado destructivo (OWASP LLM06, Excessive Agency).
+DEFENSA 3 — Mínimo privilegio + aprobación humana. Cierra: el borrado destructivo (LLM06).
 
-Dos técnicas:
-  A) Mínimo privilegio: no darle al agente herramientas que no necesita.
-     Se hace al llamar al agente, con el parámetro herramientas_permitidas.
-  B) Confirmación humana: para comandos peligrosos, pedir aprobación con input().
-
-Uso en la notebook:
-    from agente import herramientas
-
-    # A) Mínimo privilegio (ej.: resumir tickets NO necesita la terminal)
-    ejecutar_agente(
-        tarea,
-        system_prompt=PROMPT_SEGURO,
-        herramientas_permitidas=['listar_archivos', 'leer_archivo'],
-    )
-
-    # B) Confirmación humana antes de correr comandos
-    herramientas.correr_comando = correr_comando
+Se pega en la celda indicada de notebooks/taller.ipynb (reemplazando su código) y se corre con ▶.
 """
 
-import subprocess
+# ---- 3A · reemplaza la celda: # === CELDA: HERRAMIENTAS PERMITIDAS ===
+# === CELDA: HERRAMIENTAS PERMITIDAS ===   (DEFENSA 3A)
+# Para revisar tickets y notas NO hace falta la terminal: se la quitamos.
+HERRAMIENTAS = ["listar_archivos", "leer_archivo"]
+print("✅ Herramientas permitidas:", HERRAMIENTAS)
 
 
+# ---- 3B · reemplaza otra vez la celda: # === CELDA: HERRAMIENTAS PERMITIDAS ===
+# === CELDA: HERRAMIENTAS PERMITIDAS ===   (DEFENSA 3B)
+HERRAMIENTAS = ["listar_archivos", "leer_archivo", "correr_comando"]
+print("✅ Herramientas permitidas:", HERRAMIENTAS)
+
+# ---- 3B · y reemplaza la celda: # === CELDA: HERRAMIENTA correr_comando ===
+# === CELDA: HERRAMIENTA correr_comando ===   (DEFENSA 3B)
 def correr_comando(comando):
-    # Confirmación humana antes de ejecutar algo en la terminal.
-    permiso = input(f"[HUMANO] ¿Permitir correr: {comando}? (s/n) ")
-    if permiso.strip().lower() != "s":
-        return "COMANDO CANCELADO por el humano."
-    r = subprocess.run(comando, shell=True, capture_output=True, text=True, timeout=20)
-    return (r.stdout + r.stderr) or "(sin salida)"
+    """Ya no ejecuta nada sola: deja el comando esperando a que un humano lo apruebe."""
+    global COMANDO_PENDIENTE
+    COMANDO_PENDIENTE = comando
+    return ("COMANDO EN ESPERA: no se ejecutó. Muéstrale al usuario el comando exacto "
+            "y dile que escriba 'aprobar' o 'rechazar'.")

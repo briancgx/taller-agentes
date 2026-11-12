@@ -1,7 +1,7 @@
 # Taller: Seguridad en Agentes de IA — "Construye, Rompe, Repara"
 
 **Formato:** Individual, cada quien en su laptop
-**Modelo:** DeepSeek (`deepseek-chat`), una API key provista por el facilitador
+**Modelo:** DeepSeek (`deepseek-flash`, sin modo de razonamiento), una API key provista por el facilitador
 **Entorno:** Google Colab (navegador, sin instalar nada, VM aislada y desechable)
 **Nivel asumido:** principiante — todo pre-armado, los alumnos corren celdas y hacen cambios pequeños
 
@@ -29,7 +29,7 @@ El mensaje que se llevan: *un agente no es un chatbot; es un chatbot con manos. 
 |---|---|
 | **Google Colab en vez de Docker** | Cero instalación. 30 laptops distintas = instalar Docker en vivo es ruleta rusa. Colab corre en el navegador; cada alumno obtiene una VM Linux aislada y **desechable**: el agente puede borrar archivos y correr comandos sin riesgo real. Si algo se rompe, "Reiniciar entorno" y listo. |
 | **DeepSeek vía SDK de OpenAI** | DeepSeek es compatible con la API de OpenAI (`base_url=https://api.deepseek.com`). El mismo código sirve si cambias de proveedor. Soporta *function calling*, que es lo que hace que un agente use herramientas. |
-| **Notebooks para seguir en clase** | Los alumnos no escriben el agente desde cero: corren celdas ya hechas y hacen cambios pequeños (prompts, configuraciones, reemplazar funciones). Siguen la notebook mientras tú avanzas en las diapos. |
+| **Una sola notebook + app de chat** | Los alumnos arman el agente celda por celda en `taller.ipynb` y lo usan desde una app de chat (Gradio) dentro de Colab. Atacan pegando prompts en el chat y defienden **reemplazando el código** de las celdas del agente. Un solo agente de principio a fin. |
 | **Escenario realista** | El agente es un "asistente de oficina" que lee una carpeta de documentos. Uno trae instrucciones ocultas: es el caso real de *inyección indirecta* que sufren los agentes de producción hoy. |
 
 ### Sobre la API key
@@ -44,18 +44,17 @@ El mensaje que se llevan: *un agente no es un chatbot; es un chatbot con manos. 
 > Tiempos y guion detallado en [GUIA-FACILITADOR.md](GUIA-FACILITADOR.md). Hay holgura: si vas rápido, sobra material.
 
 - **Bloque 0 — Bienvenida y setup.** Quién eres, qué haremos, el entorno y cómo usar Colab. Todos llegan a "conexión funciona".
-- **Bloque 1 — Construye** (`01_construye.ipynb`). Qué es un LLM y un agente, el ciclo, las herramientas; ponen el agente a trabajar y lo ven decidir y actuar solo.
-- **Bloque 2 — Rompe** (`02_ataca.ipynb`). Equipo rojo: inyección directa, inyección indirecta (la estrella) y acción destructiva. Cada ataque se etiqueta con su entrada del **OWASP Top 10 para LLM**. Jailbreaks se cubren como cultura (solo en diapo).
-- **Bloque 3 — Repara** (`03_repara.ipynb`). Equipo azul: 3 defensas en código (separar datos, control de acceso, mínimo privilegio + confirmación humana), re-lanzando los ataques para ver que ya fallan. Mensaje: **defensa en profundidad**.
+- **Bloque 1 — Construye** (`taller.ipynb`, Sección 1). Qué es un LLM y un agente, el ciclo, las herramientas; ponen el agente a trabajar y lo ven decidir y actuar solo.
+- **Bloque 2 — Rompe** (`taller.ipynb`, Sección 2; prompts en `ataques/prompts_de_ataque.md`). Equipo rojo: inyección directa, inyección indirecta (la estrella) y acción destructiva. Cada ataque se etiqueta con su entrada del **OWASP Top 10 para LLM**. Jailbreaks se cubren como cultura (solo en diapo).
+- **Bloque 3 — Repara** (`taller.ipynb`, Sección 3; código de cada defensa en `defensas/`). Equipo azul: 3 defensas en código (separar datos, control de acceso, mínimo privilegio + confirmación humana), re-lanzando los ataques para ver que ya fallan. Mensaje: **defensa en profundidad**.
 - **Cierre.** Las 3 ideas que se llevan + recursos.
 
 ---
 
 ## 4. Materiales (estado)
 
-- [x] **Notebook 1 – Construye** (`notebooks/01_construye.ipynb`)
-- [x] **Notebook 2 – Ataca** (`notebooks/02_ataca.ipynb`)
-- [x] **Notebook 3 – Repara** (`notebooks/03_repara.ipynb`)
+- [x] **Notebook del taller** (`notebooks/taller.ipynb`): construir + app de chat + atacar + proteger
+- [x] **Prompts de ataque** (`ataques/prompts_de_ataque.md`)
 - [x] **Motor del agente** (`agente/`) + **escenario** (`escenario/`, `ataques/`) + **soluciones** (`defensas/`)
 - [x] **Diapositivas** (`slides/index.html` animado + `slides/taller-agentes.pptx`)
 - [x] **Guía del facilitador** (`GUIA-FACILITADOR.md`)
